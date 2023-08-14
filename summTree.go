@@ -14,23 +14,16 @@ func main() {
 		Left:  &tree{Val: 10, Left: &tree{Val: -3}}}
 
 	summ := 0
-	SummTreeNode(tree, &summ)
+	summ = SummTreeNode(tree, summ)
 	fmt.Println(summ)
 }
 
-func SummTreeNode(node *tree, summ *int) {
+func SummTreeNode(node *tree, summ int) int {
 
 	if node == nil {
-		return
+		return 0
 	}
 
-	*summ = *summ + node.Val
+	return SummTreeNode(node.Left, node.Val) + SummTreeNode(node.Right, node.Val) + node.Val
 
-	if node.Left != nil {
-		SummTreeNode(node.Left, summ)
-	}
-
-	if node.Right != nil {
-		SummTreeNode(node.Right, summ)
-	}
 }
